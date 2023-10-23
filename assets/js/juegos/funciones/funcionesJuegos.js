@@ -1,11 +1,22 @@
 /**
- * dibuja las tarjetas de cada juego
+ * FUNCIONES DE 
+ * PAGINA pages\juegos.html
  */
-function inicioPaginaJuegos() {
+
+
+/**
+ * dibuja las tarjetas de cada juego
+ * @param {*} plataformas 
+ */
+function inicioPaginaJuegos(plataformas) {
     const games__list = document.querySelector(".games__list");
     const htmlJuegos = [];
     let i=0;
     for (juego of juegosDisponibles) {
+        
+        // solo mostrar juegos de plataformas pedidas
+        if(plataformas.indexOf(juego.plataforma)==-1) continue;
+
         ++i;
         // console.log(i,{juego});
         let html = templateJuego;
@@ -24,5 +35,6 @@ function inicioPaginaJuegos() {
 
         htmlJuegos.push(html);
     }
-    games__list.innerHTML = htmlJuegos.join("");
+    
+    games__list.innerHTML =  htmlJuegos.length>0 ? htmlJuegos.join("") : "Seleccione plataforma para mostrar juegos." ;
 }

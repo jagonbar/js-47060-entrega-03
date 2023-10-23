@@ -1,0 +1,100 @@
+/**
+ * RETORNA JSON DE VENTA DESDE LOCALSTORAGE... SINO ARREGLO VACIO
+ * @returns {JSON}
+ */
+function obtenerObjetoVenta(){
+    let objetoVenta = JSON.parse(localStorage.getItem("ventaActual")) ?? [];
+    
+    //antes de retornar se ordena
+    objetoVenta.sort((a,b)=>{
+        return (a.titulo.toUpperCase()>b.titulo.toUpperCase())?1:-1;
+    })
+    return objetoVenta;
+}
+
+/**
+ * ACTUALIZAR LOCALSTORAGE DE VENTA
+ * @param {*} ventaActual 
+ */
+function actualizarVenta(ventaActual){
+    ventaActual = JSON.stringify(ventaActual);
+    localStorage.setItem("ventaActual",ventaActual);
+}
+
+/**
+ * va a buscar carro de venta desde localstorage para
+ * crear tabla resumen 
+ * @param {*} ventaActual 
+ * @returns {boolean} si hay o no items
+ */
+function mostrarTablaVenta(){
+    const resumenVenta = document.querySelector("#resumenVenta");
+    const ventaActual  = obtenerObjetoVenta();
+    let htmlVenta =[];
+    if(ventaActual.length==0){
+        resumenVenta.innerHTML="No hay productos en carro de compras.\nVe a juegos para agregar alguno."
+        return false;
+    }
+    let numero        = 0 
+    let cantidadFinal = 0
+    let totalFinal    = 0
+    for(item of ventaActual){
+        numero++;
+        
+        let htmlItem = templateVentaItem;
+        htmlItem = htmlItem.replace("###ELIMINAR###","bnt eliminar")
+        htmlItem = htmlItem.replace("###NUMERO###"  ,numero)
+        htmlItem = htmlItem.replace("###TITULO###"  ,item.titulo)
+        htmlItem = htmlItem.replace("###PRECIO###"  ,item.precio)
+        htmlItem = htmlItem.replace("###CANTIDAD###",item.cantidad)
+        htmlItem = htmlItem.replace("###TOTAL###"   ,item.precio*item.cantidad)
+
+        cantidadFinal += item.cantidad; 
+        totalFinal    += item.precio*item.cantidad;
+        htmlVenta.push(htmlItem);
+    }
+    
+    htmlTablaVenta = templateVentaCompleta.replace("###ITEMS###",htmlVenta.join(""));
+    htmlTablaVenta = htmlTablaVenta.replace("###CANTIDAD_FINAL###",cantidadFinal)
+    htmlTablaVenta = htmlTablaVenta.replace("###TOTAL_FINAL###",totalFinal)
+    resumenVenta.innerHTML = htmlTablaVenta;
+    return true;
+}
+
+
+/**
+ * agrega juego a venta
+ * @param {*} juego 
+ * @param {*} cantidad 
+ */
+function agregarJuegoVenta(juego, cantidad=1){
+    let ventaActual = obtenerObjetoVenta();
+
+    let indexJuego = ventaActual.findIndex(item=>item.id===juego.id);
+        
+    if(indexJuego==-1) {
+        alert(`Agregado juego a la venta.\nNumero de copias: ${cantidad}`);
+        ventaActual.push({...juego,cantidad});
+    }else{
+        alert(`Se ha actualizado cantidad a comprar a ${cantidad} items`);
+        ventaActual[indexJuego]["cantidad"]= cantidad;
+    }     
+    actualizarVenta(ventaActual);
+}
+
+
+/**
+ * saca producto de la venta, dejandolo al final para eliminarlo con pop
+ * @param {*} id 
+ */
+function sacarProductoDeVenta(id){
+    console.log("function sacarProductoDeVenta()")
+    //buscar id de producto
+    //dejarlo al final
+    //sacarlo con pop
+    const indice = venta.findIndex(item => item.id === id);
+
+    if (indice !== -1) {
+        venta.splice(indice, 1);
+    }
+}
