@@ -42,6 +42,8 @@ function mostrarTablaVenta(){
         numero++;
         
         let htmlItem = templateVentaItem;
+        
+        let datasetEliminar = `data-id=${item.id}`;
         htmlItem = htmlItem.replace("###ELIMINAR###","bnt eliminar")
         htmlItem = htmlItem.replace("###NUMERO###"  ,numero)
         htmlItem = htmlItem.replace("###TITULO###"  ,item.titulo)
@@ -58,6 +60,9 @@ function mostrarTablaVenta(){
     htmlTablaVenta = htmlTablaVenta.replace("###CANTIDAD_FINAL###",cantidadFinal)
     htmlTablaVenta = htmlTablaVenta.replace("###TOTAL_FINAL###",totalFinal)
     resumenVenta.innerHTML = htmlTablaVenta;
+    
+    //agregar eventos a linkEliminarJuego
+
     return true;
 }
 

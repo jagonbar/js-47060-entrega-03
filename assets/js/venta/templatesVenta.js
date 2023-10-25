@@ -18,7 +18,11 @@ const templateVentaCompleta = `
 `;
 const templateVentaItem     = `
 <tr>
-    <td>###ELIMINAR###</td>
+    <td>
+        <a href="#" class="linkEliminarJuego" ###ELIMINAR###>
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+        </a>
+    </td>
     <td>###NUMERO###</td>
     <td>###TITULO###</td>
     <td>###PRECIO###</td>

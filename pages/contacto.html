@@ -60,39 +60,39 @@
                     <form action="">
                         <div class="contacto__linea">
                             <div class="contacto__linea_control">
-                                <input class="contacto__linea_control_input" type="text" placeholder="Nombre">
+                                <input class="contacto__linea_control_input" type="text" placeholder="Nombre" id="txtNombre" name="txtNombre">
                             </div>
                             <div class="contacto__linea_control">
-                                <input class="contacto__linea_control_input" type="text" placeholder="Apellido">
+                                <input class="contacto__linea_control_input" type="text" placeholder="Apellido" id="txtApellido" name="txtApellido">
                             </div>
                         </div>
                         <div class="contacto__linea">
                             <div class="contacto__linea_control">
-                                <input class="contacto__linea_control_input" type="text" placeholder="Email">
+                                <input class="contacto__linea_control_input" type="text" placeholder="Email" id="txtEmail" name="txtEmail">
                             </div>
                             <div class="contacto__linea_control">
-                                <input class="contacto__linea_control_input" type="text" placeholder="Fono">
+                                <input class="contacto__linea_control_input" type="text" placeholder="Fono" id="txtFono" name="txtFono">
                             </div>
                         </div>
 
                         <div class="contacto__linea">
                             <div class="contacto__linea_control">
-                                <select name="" id="" class="contacto__linea_control_input">
+                                <select class="contacto__linea_control_input" id="slcMotivo" name="slcMotivo">
                                     <option value="">[motivo de tu consulta]</option>
-                                    <option value="">Información</option>
-                                    <option value="">Reclamo</option>
+                                    <option value="informacion">Información</option>
+                                    <option value="reclamo">Reclamo</option>
                                 </select>
                             </div>
                         </div>
                         <div class="contacto__linea">
                             <div class="contacto__linea_control">
-                                <textarea class="contacto__linea_control_input"
+                                <textarea id="txtConsulta" name="txtConsulta" class="contacto__linea_control_input"
                                     placeholder="Escribe tu consulta aca :)"></textarea>
                             </div>
                         </div>
                         <div class="contacto__linea">
                             <div class="contacto__linea_control">
-                                <button class="contacto__linea_control_input">Envía consulta</button>
+                                <button id="btnEnviarConsulta" name="btnEnviarConsulta" class="contacto__linea_control_input">Envía consulta</button>
                             </div>
                         </div>
                     </form>
@@ -126,6 +126,8 @@
         </footer>
     </div>
     <script src="https://kit.fontawesome.com/94dcfc8974.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/validaciones.js"></script>
+    <script src="../assets/js/contacto/gestionContacto.js"></script>
 </body>
 
 </html>
