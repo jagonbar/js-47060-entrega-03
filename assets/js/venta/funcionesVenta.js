@@ -3,6 +3,7 @@
  * @returns {JSON}
  */
 function obtenerObjetoVenta(){
+    console.log("obtenerObjetoVenta()")
     let objetoVenta = JSON.parse(localStorage.getItem("ventaActual")) ?? [];
     
     //antes de retornar se ordena
@@ -17,6 +18,7 @@ function obtenerObjetoVenta(){
  * @param {*} ventaActual 
  */
 function actualizarVenta(ventaActual){
+    console.log("actualizarVenta()")
     ventaActual = JSON.stringify(ventaActual);
     localStorage.setItem("ventaActual",ventaActual);
 }
@@ -28,6 +30,7 @@ function actualizarVenta(ventaActual){
  * @returns {boolean} si hay o no items
  */
 function mostrarTablaVenta(){
+    console.log("mostrarTablaVenta()")
     const resumenVenta = document.querySelector("#resumenVenta");
     const ventaActual  = obtenerObjetoVenta();
     let htmlVenta =[];
@@ -43,29 +46,46 @@ function mostrarTablaVenta(){
         
         let htmlItem = templateVentaItem;
         
-        let datasetEliminar = `data-id=${item.id}`;
-        htmlItem = htmlItem.replace("###ELIMINAR###","bnt eliminar")
+        let datasetEliminar = `data-id=${item.id} data-titulo="${item.titulo}"`;
+        htmlItem = htmlItem.replace("###ELIMINAR###",datasetEliminar)
         htmlItem = htmlItem.replace("###NUMERO###"  ,numero)
         htmlItem = htmlItem.replace("###TITULO###"  ,item.titulo)
-        htmlItem = htmlItem.replace("###PRECIO###"  ,item.precio)
-        htmlItem = htmlItem.replace("###CANTIDAD###",item.cantidad)
-        htmlItem = htmlItem.replace("###TOTAL###"   ,item.precio*item.cantidad)
+        htmlItem = htmlItem.replace("###PRECIO###"  , formateaMiles(item.precio))
+        htmlItem = htmlItem.replace("###CANTIDAD###", formateaMiles(item.cantidad))
+        htmlItem = htmlItem.replace("###TOTAL###"   , formateaMiles(item.precio*item.cantidad))
 
         cantidadFinal += item.cantidad; 
         totalFinal    += item.precio*item.cantidad;
         htmlVenta.push(htmlItem);
     }
     
-    htmlTablaVenta = templateVentaCompleta.replace("###ITEMS###",htmlVenta.join(""));
-    htmlTablaVenta = htmlTablaVenta.replace("###CANTIDAD_FINAL###",cantidadFinal)
-    htmlTablaVenta = htmlTablaVenta.replace("###TOTAL_FINAL###",totalFinal)
+    htmlTablaVenta = templateVentaCompleta.replace("###ITEMS###"  ,htmlVenta.join(""));
+    htmlTablaVenta = htmlTablaVenta.replace("###CANTIDAD_FINAL###",formateaMiles(cantidadFinal))
+    htmlTablaVenta = htmlTablaVenta.replace("###TOTAL_FINAL###"   ,formateaMiles(totalFinal))
     resumenVenta.innerHTML = htmlTablaVenta;
     
     //agregar eventos a linkEliminarJuego
+    const linksEliminarJuego = document.querySelectorAll(".linkEliminarJuego")
+    for(link of linksEliminarJuego){
+        link.addEventListener("click",clickLinkEliminarJuego)
+    }
 
     return true;
 }
+function clickLinkEliminarJuego(event){
+    console.log("clickLinkEliminarJuego()")
+    event.preventDefault()
 
+    let titulo = this.dataset.titulo;
+    if(confirm(`Quieres eliminar la venta de juego ${titulo} `)){
+        let id = this.dataset.id;
+        console.log({id})
+        sacarProductoDeVenta(id);
+        mostrarTablaVenta()
+
+    }
+
+}
 
 /**
  * agrega juego a venta
@@ -73,6 +93,7 @@ function mostrarTablaVenta(){
  * @param {*} cantidad 
  */
 function agregarJuegoVenta(juego, cantidad=1){
+    console.log("agregarJuegoVenta()")
     let ventaActual = obtenerObjetoVenta();
 
     let indexJuego = ventaActual.findIndex(item=>item.id===juego.id);
@@ -92,14 +113,14 @@ function agregarJuegoVenta(juego, cantidad=1){
  * saca producto de la venta, dejandolo al final para eliminarlo con pop
  * @param {*} id 
  */
-function sacarProductoDeVenta(id){
-    console.log("function sacarProductoDeVenta()")
-    //buscar id de producto
-    //dejarlo al final
-    //sacarlo con pop
-    const indice = venta.findIndex(item => item.id === id);
+function sacarProductoDeVenta(id){    
+    console.log("sacarProductoDeVenta()")
 
+    const ventaActual = obtenerObjetoVenta();
+    const indice      = ventaActual.findIndex(item => item.id === id);
+    console.log({indice})
     if (indice !== -1) {
-        venta.splice(indice, 1);
+        ventaActual.splice(indice, 1);
+        actualizarVenta(ventaActual);
     }
 }

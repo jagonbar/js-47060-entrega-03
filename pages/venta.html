@@ -46,9 +46,15 @@
         </header>
         <!-- -------------------------------------------------------- -->
         <main>
-            <h1>Resumen de tu compra</h1>
-            <div id="resumenVenta">No hay juegos agregados al carro
-            </div>
+            <h1>Resumen de tu compra</h1>  
+            <div class="venta">
+                <div class="detalleVenta resumenVenta" id="resumenVenta">
+                    No hay juegos agregados al carro
+                </div>
+                <div class="detalleVenta botonesVenta" id="botonesVenta">
+                    <button id="btnRealizarVenta" name="btnRealizarVenta" class="contacto__linea_control_input">Realizar Compra</button>
+                </div>
+            </div>          
         </main>
         <!-- -------------------------------------------------------- -->
         <footer>
@@ -78,6 +84,9 @@
     <!-- inclusion de iconos -->
     <script src="https://kit.fontawesome.com/94dcfc8974.js" crossorigin="anonymous"></script>
 
+    <!-- funciones de validacion comunes -->
+    <script src="../assets/js/validaciones.js"></script>
+    
     <!-- template html para mostrar tabla de resumen de ventas -->
     <script src="../assets/js/venta/templatesVenta.js"></script>
     

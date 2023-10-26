@@ -58,3 +58,14 @@ function validaEmail(valor){
     let valido = regexEmail.test(valor);
     return valido;
 }
+
+function formateaMiles(valor){
+    es_entero = (parseInt(valor) ===parseFloat(valor))
+    es_valido = (valor!==null) && (valor!==undefined) && ( !isNaN(valor) ) && es_entero;
+    if(es_valido){
+        valor = parseInt(valor);
+        return valor.toLocaleString("es-CL");
+    }
+    return 0;
+
+}

@@ -11,22 +11,22 @@ const templateVentaCompleta = `
         ###ITEMS###
         <tr>
             <td colspan="4">Total</td>
-            <td>###CANTIDAD_FINAL###</td>
-            <td>###TOTAL_FINAL###</td>
+            <td class="numero">###CANTIDAD_FINAL###</td>
+            <td class="numero monto">###TOTAL_FINAL###</td>
         </tr>
     </table>
 `;
 const templateVentaItem     = `
 <tr>
-    <td>
+    <td class="center">
         <a href="#" class="linkEliminarJuego" ###ELIMINAR###>
             <i class="fa fa-window-close" aria-hidden="true"></i>
         </a>
     </td>
     <td>###NUMERO###</td>
     <td>###TITULO###</td>
-    <td>###PRECIO###</td>
-    <td>###CANTIDAD###</td>
-    <td>###TOTAL###</td>
+    <td class="numero monto">###PRECIO###</td>
+    <td class="numero">###CANTIDAD###</td>
+    <td class="numero monto">###TOTAL###</td>
 </tr>
 `;

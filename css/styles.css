@@ -783,6 +783,44 @@ footer .footer-end {
   text-align: center;
 }
 
+div.venta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+div.venta .tableCatalogo {
+  width: 100%;
+}
+div.venta .tableCatalogo tr td {
+  padding: 0 10px;
+  border: 1px dotted grey;
+}
+div.venta .tableCatalogo tr td.center {
+  text-align: center;
+}
+div.venta .tableCatalogo tr td.numero {
+  text-align: right;
+}
+div.venta .tableCatalogo tr td.monto::before {
+  content: "$  ";
+}
+div.venta .detalleVenta {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+div.venta #btnRealizarVenta {
+  font-size: 1.8rem;
+  padding: 0.5rem 1rem;
+  font-family: "Jura", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
 .divAcciones {
   width: 100%;
   margin: 0 auto;
