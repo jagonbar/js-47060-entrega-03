@@ -42,7 +42,7 @@ function validaNoVacio(valor){
 function validaTelefono(valor){
     
     //por ahora solo celulares de chile
-    const regexFono = new RegExp("^(\\+?56)?(\\s?)(0?9)(\\s?)[98765432]\\d{7}$", "gi");
+    const regexFono = new RegExp("^\\+?569?[0-9]{8}$", "gi");
     let valido = regexFono.test(valor);
 
     return valido;

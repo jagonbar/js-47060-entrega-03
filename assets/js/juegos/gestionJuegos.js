@@ -9,20 +9,9 @@ const plataformas = ["pc","playstation","switch","xbox"];
 window.onload = function(){
     
     //01 - al cargar pagina, dibujar todas las tarjetas de juegos
-    inicioPaginaJuegos(plataformas);
-
-    //02 - asociar eventos a tarjetas
-    const linkAgregarJuegos = document.querySelectorAll(".link_agregar_juego");
+    inicioPaginaJuegos(plataformas);    
     
-    linkAgregarJuegos.forEach(function(linkJuego){
-        // linkJuego.addEventListener("click",function(event){
-            //     event.preventDefault();
-            //     console.log(this)            
-            // });
-            linkJuego.addEventListener("click",clickLinkAgregarJuegos);
-        });
-    
-    //03 - asociar eventos a checks de filtro
+    //02 - asociar eventos a checks de filtro
     const checksFiltro        = document.querySelectorAll(".checkFiltro");
     checksFiltro.forEach(function(checkFiltro){
         checkFiltro.addEventListener("change",clickcheckFiltro);
@@ -42,32 +31,13 @@ function clickLinkAgregarJuegos(event){
     let juego = {...this.dataset};
     console.log("click hecho a ",{juego});
     cantidad = pedirCantidad();
-
-    //de assets/js/venta/gestionVentas.js
-    agregarJuegoVenta(juego, cantidad);
+    console.log("paso 2")
+    if(cantidad!==false){
+        console.log("paso 3")
+        //de assets/js/venta/gestionVentas.js
+        agregarJuegoVenta(juego, cantidad);
+    }
     
-}
-
-
-/**
- * pide cantidad a vender entre 1 a 100
- * si numero está fuera de rango, se sigue preguntando
- * @returns cantidad
- */
-function pedirCantidad(){
-    console.log("function pedirCantidad()")
-    let cantidad;
-    do{
-        cantidad= prompt("Indica cantidad a comprar (de 1 a 100) ");
-        
-        if(cantidad===null) {
-            console.log("canceló prompt");
-            return false;
-        }//canceló prompt
-
-        es_valido   = validaNumeroInt(cantidad) && validaRango(cantidad);
-    }while(!es_valido)
-    return parseInt(cantidad);
 }
 
 /**

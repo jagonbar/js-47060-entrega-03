@@ -32,12 +32,20 @@ function actualizarVenta(ventaActual){
 function mostrarTablaVenta(){
     console.log("mostrarTablaVenta()")
     const resumenVenta = document.querySelector("#resumenVenta");
+    const botonesVenta = document.querySelector("#botonesVenta");
+    
+    
+    botonesVenta.style.visibility="hidden"
+
+
     const ventaActual  = obtenerObjetoVenta();
     let htmlVenta =[];
     if(ventaActual.length==0){
-        resumenVenta.innerHTML="No hay productos en carro de compras.\nVe a juegos para agregar alguno."
+        resumenVenta.innerHTML=`<div style="background:white">No hay productos en carro de compras.\nVe a juegos para agregar alguno.</div>`
         return false;
     }
+    botonesVenta.style.visibility="visible"
+    
     let numero        = 0 
     let cantidadFinal = 0
     let totalFinal    = 0
@@ -69,7 +77,7 @@ function mostrarTablaVenta(){
     for(link of linksEliminarJuego){
         link.addEventListener("click",clickLinkEliminarJuego)
     }
-
+    
     return true;
 }
 function clickLinkEliminarJuego(event){
@@ -93,6 +101,9 @@ function clickLinkEliminarJuego(event){
  * @param {*} cantidad 
  */
 function agregarJuegoVenta(juego, cantidad=1){
+    console.log("paso 4")
+    if(!cantidad) return;
+    console.log("paso 5")
     console.log("agregarJuegoVenta()")
     let ventaActual = obtenerObjetoVenta();
 
@@ -123,4 +134,11 @@ function sacarProductoDeVenta(id){
         ventaActual.splice(indice, 1);
         actualizarVenta(ventaActual);
     }
+}
+
+function realizarVenta(){
+    alert("compra realizada!!")
+    console.log("se borra storage para nuevo ejercicio")
+    localStorage.clear();
+    mostrarTablaVenta()
 }
